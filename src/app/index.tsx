@@ -1,11 +1,13 @@
-import React from 'react';
+import { useAuth } from '@clerk/clerk-expo';
+import { Redirect } from 'expo-router';
 
-const Index = () => {
-  return (
-    <div>
-      <h1>Index</h1>
-    </div>
-  );
-}
+const Home = () => {
+  const { isSignedIn } = useAuth();
 
-export default Index;
+  if (isSignedIn) {
+    return <Redirect href={'/(root)/(tabs)/home'} />;
+  }
+  return <Redirect href={'/(auth)/welcome'}></Redirect>;
+};
+
+export default Home;
