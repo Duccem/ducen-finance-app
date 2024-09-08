@@ -92,7 +92,7 @@ const WelcomePage = () => {
                       <TouchableOpacity
                         className="w-full flex justify-end items-end p-5"
                         onPress={() => {
-                          router.push('/(auth)/sign-up');
+                          router.replace('/(auth)/sign-up');
                         }}
                       >
                         <Text className="text-black underline text-md font-NunitoBold">
@@ -104,9 +104,10 @@ const WelcomePage = () => {
                       className="rounded-3xl h-[42px] flex flex-row justify-between pl-3 pr-1  items-center bg-foreground-primary relative"
                       onPress={() =>
                         index === total - 1
-                          ? router.push('/(auth)/sign-up')
+                          ? router.replace('/(auth)/sign-up')
                           : swiper.current?.scrollBy(1)
                       }
+                      activeOpacity={1}
                     >
                       <Text className="text-background-third font-NunitoBold text-xs mr-4">
                         {index === total - 1 ? 'Get Started' : 'Next'}

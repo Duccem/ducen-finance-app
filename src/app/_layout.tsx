@@ -5,18 +5,21 @@ import * as NavigationBar from 'expo-navigation-bar';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { LogBox } from 'react-native';
 import 'react-native-reanimated';
+import { AnimationScreen } from '../libs/ui/sections/splash';
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
+LogBox.ignoreLogs(['Clerk:']);
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 NavigationBar.setVisibilityAsync('hidden');
-LogBox.ignoreLogs(['Clerk:']);
 
 export default function RootLayout() {
+  const [appReady, setAppReady] = useState(false);
+  const [animationFinished, setAnimationFinished] = useState(false);
   const [loaded] = useFonts({
     Nunito: require('../assets/fonts/Nunito-Regular.ttf'),
     NunitoBold: require('../assets/fonts/Nunito-Bold.ttf'),
@@ -29,6 +32,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      setAppReady(true);
     }
   }, [loaded]);
 
@@ -38,8 +42,17 @@ export default function RootLayout() {
     );
   }
 
-  if (!loaded) {
-    return null;
+  if (!appReady || !animationFinished) {
+    return (
+      <AnimationScreen
+        appReady={appReady}
+        finish={(isCancelled: boolean) => {
+          if (!isCancelled) {
+            setAnimationFinished(true);
+          }
+        }}
+      />
+    );
   }
 
   return (
