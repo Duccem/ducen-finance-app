@@ -5,12 +5,10 @@ import FacebookIcon from '@/src/libs/ui/components/icons/facebook';
 import GoogleIcon from '@/src/libs/ui/components/icons/google';
 import { Input } from '@/src/libs/ui/components/input';
 import { Link } from 'expo-router';
-import { useState } from 'react';
 import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const SignUpPage = () => {
-  const [password, setPassword] = useState('');
+const SignInPage = () => {
   return (
     <ScrollView
       className="bg-background-secondary flex-1 h-screen"
@@ -23,28 +21,22 @@ const SignUpPage = () => {
         <View className="h-24 w-24 rounded-full bg-background-third flex justify-center items-center pl-2 mt-6">
           <Image source={logo} className="w-16 h-16" resizeMode="center" />
         </View>
-        <View className="flex flex-col flex-1 w-full px-5 mt-10 items-start justify-between">
+        <View className="flex flex-col w-full px-5 mt-10 items-start justify-between  flex-1">
           <View className="w-full my-8">
-            <Text className="text-2xl font-NunitoBold text-foreground-primary mb-5">
-              Register to get started
+            <Text className="text-2xl font-NunitoBold text-foreground-primary MB-5">
+              Welcome back! 👋
             </Text>
-            <Input placeholder="Name" />
             <Input placeholder="Mail" />
-            <Input
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChangeText={(v) => setPassword(v)}
-            />
+            <Input placeholder="Password" type="password" />
           </View>
           <View className="w-full pb-10">
             <Button
-              title="Register"
+              title="Login"
               className="w-full rounded-3xl bg-foreground-primary h-12"
             />
             <View className="flex flex-row justify-center items-center my-3 gap-x-3">
               <View className="flex-1 h-[1px] bg-gray-300" />
-              <Text className="text-sm text-gray-500">Or Register with</Text>
+              <Text className="text-sm text-gray-500">Or login with</Text>
               <View className="flex-1 h-[1px] bg-gray-300" />
             </View>
             <View className="relative flex flex-row w-full justify-center items-center gap-[10px]">
@@ -72,14 +64,14 @@ const SignUpPage = () => {
               />
             </View>
             <Link
-              href={'/(auth)/sign-in'}
+              href={'/(auth)/sign-up'}
               className="text-lg w-full text-center text-foreground-secondary mt-5"
             >
               <Text className="text-foreground-secondary font-NunitoMedium mr-2">
-                Already have an account?{' '}
+                Don`t have an account?{' '}
               </Text>
               <Text className="text-brand-primary font-NunitoBold underline ml-3">
-                Log In
+                Sign Up
               </Text>
             </Link>
           </View>
@@ -89,4 +81,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
