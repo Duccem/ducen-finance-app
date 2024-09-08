@@ -25,11 +25,12 @@ export const AnimationScreen = ({
           width: 300,
           height: 300,
         }}
-        source={require('@/src/assets/animations/LogoPocketPlanet.json')}
+        source={require('@/src/assets/animations/splash.json')}
         autoPlay
         loop={!appReady}
         ref={animation}
         onAnimationFinish={finish}
+        duration={2000}
       />
     </Animated.View>
   );
