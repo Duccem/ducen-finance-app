@@ -1,4 +1,4 @@
-import { tokenCache } from '@/src/modules/auth/infrastructure/clerk/token';
+import { tokenCache } from '@/src/modules/shared/infrastructure/ClerkToken';
 import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-expo';
 import { useFonts } from 'expo-font';
 import * as NavigationBar from 'expo-navigation-bar';
