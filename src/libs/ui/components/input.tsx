@@ -38,6 +38,8 @@ export const Input = ({
   error,
   type = 'text',
   placeholder,
+  onBlur,
+  onFocus,
   value,
   ...props
 }: InputFieldProps) => {
@@ -68,7 +70,7 @@ export const Input = ({
     }).start();
   };
   const onBlurAnimation = () => {
-    if (!value) {
+    if (!value || value === '') {
       Animated.timing(animatedValue?.current, {
         toValue: 0,
         duration: 500,
@@ -108,14 +110,13 @@ export const Input = ({
               placeholderTextColor={'#93969e'}
               cursorColor={'#000'}
               secureTextEntry={type === 'password' && !visible ? true : false}
-              value={value}
-              onFocus={(e) => {
-                onFocusAnimation();
-                props.onFocus && props.onFocus(e);
-              }}
               onBlur={(e) => {
                 onBlurAnimation();
-                props.onBlur && props.onBlur(e);
+                onBlur && onBlur(e);
+              }}
+              onFocus={(e) => {
+                onFocusAnimation();
+                onFocus && onFocus(e);
               }}
               {...props}
             />
