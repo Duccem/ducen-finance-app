@@ -1,9 +1,19 @@
-import { Text, View } from 'react-native';
+import { useAuth } from '@clerk/clerk-expo';
+import { router } from 'expo-router';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 const Home = () => {
+  const { signOut } = useAuth();
   return (
-    <View>
-      <Text>Home</Text>
+    <View className="flex flex-1 flex-col justify-center items-center">
+      <TouchableOpacity
+        onPress={() => {
+          signOut();
+          router.push('/(auth)/sign-in');
+        }}
+      >
+        <Text>Out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
