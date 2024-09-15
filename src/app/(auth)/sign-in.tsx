@@ -67,6 +67,9 @@ const SignInPage = () => {
                 <Input placeholder="Password" value={value} onChangeText={onChange} onBlur={onBlur} type="password" />
               )}
             />
+            <Link href={'/(auth)/forgot-password'} className="px-2 my-3">
+              <Text className="underline text-sm font-NunitoSemiBold text-foreground-primary">Forgot password?</Text>
+            </Link>
           </View>
           <View className="w-full pb-10">
             <Button

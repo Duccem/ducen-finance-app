@@ -55,9 +55,7 @@ const WelcomePage = () => {
           index={0}
           snapPoints={['35%']}
           backgroundComponent={({ style }) => (
-            <Animated.View
-              style={[style, { backgroundColor: '#F0F0F0', borderRadius: 20 }]}
-            />
+            <Animated.View style={[style, { backgroundColor: '#F0F0F0', borderRadius: 20 }]} />
           )}
         >
           <BottomSheetView
@@ -92,20 +90,16 @@ const WelcomePage = () => {
                       <TouchableOpacity
                         className="w-full flex justify-end items-end p-5"
                         onPress={() => {
-                          router.replace('/(auth)/sign-up');
+                          router.push('/(auth)/sign-up');
                         }}
                       >
-                        <Text className="text-black underline text-md font-NunitoBold">
-                          Skip
-                        </Text>
+                        <Text className="text-black underline text-md font-NunitoBold">Skip</Text>
                       </TouchableOpacity>
                     </View>
                     <TouchableOpacity
                       className="rounded-3xl h-[42px] flex flex-row justify-between pl-3 pr-1  items-center bg-foreground-primary relative"
                       onPress={() =>
-                        index === total - 1
-                          ? router.replace('/(auth)/sign-up')
-                          : swiper.current?.scrollBy(1)
+                        index === total - 1 ? router.replace('/(auth)/sign-up') : swiper.current?.scrollBy(1)
                       }
                       activeOpacity={1}
                     >
@@ -113,10 +107,7 @@ const WelcomePage = () => {
                         {index === total - 1 ? 'Get Started' : 'Next'}
                       </Text>
                       <View className="h-[36px] w-[36px] rounded-full bg-background-third flex justify-center items-center">
-                        <ArrowRight
-                          className="text-foreground-primary"
-                          size={15}
-                        />
+                        <ArrowRight className="text-foreground-primary" size={15} />
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -124,30 +115,21 @@ const WelcomePage = () => {
               }}
             >
               <View className="h-full flex flex-col">
-                <Text className="text-3xl font-NunitoBold mb-5">
-                  Manage your finance with ease
-                </Text>
+                <Text className="text-3xl font-NunitoBold mb-5">Manage your finance with ease</Text>
                 <Text className="text-sm font-NunitoMedium text-foreground-secondary">
-                  Start tracking your expenses, create personal or family
-                  budgets, and set financial goals.
+                  Start tracking your expenses, create personal or family budgets, and set financial goals.
                 </Text>
               </View>
               <View className="h-ful flex flex-col">
-                <Text className="text-3xl font-NunitoBold">
-                  Sync your finance with bank accounts
-                </Text>
+                <Text className="text-3xl font-NunitoBold">Sync your finance with bank accounts</Text>
                 <Text className="text-sm font-NunitoMedium text-foreground-secondary">
-                  Sync your bank account with the app, allowing all transactions
-                  to be automatically tracked.
+                  Sync your bank account with the app, allowing all transactions to be automatically tracked.
                 </Text>
               </View>
               <View className="h-ful flex flex-col">
-                <Text className="text-3xl font-NunitoBold">
-                  Scan the receipt to upload the data
-                </Text>
+                <Text className="text-3xl font-NunitoBold">Scan the receipt to upload the data</Text>
                 <Text className="text-sm font-NunitoMedium text-foreground-secondary">
-                  Simply scan the receipt to quickly and easily upload the
-                  information about your purchases.
+                  Simply scan the receipt to quickly and easily upload the information about your purchases.
                 </Text>
               </View>
             </Swiper>

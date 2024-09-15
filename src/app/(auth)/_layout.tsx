@@ -9,6 +9,10 @@ export default function RootLayout() {
       <Stack.Screen name="sign-up" options={{ headerShown: false }} />
       <Stack.Screen name="confirm-code" options={{ headerShown: false }} />
       <Stack.Screen name="email-verified" options={{ headerShown: false }} />
+      <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+      <Stack.Screen name="recovery-code" options={{ headerShown: false }} />
+      <Stack.Screen name="reset-password" options={{ headerShown: false }} />
+      <Stack.Screen name="success-password" options={{ headerShown: false }} />
     </Stack>
   );
 }

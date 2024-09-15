@@ -9,6 +9,7 @@ export type AuthState = {
     code: string;
     error?: string;
   };
+  recoveryCode: string;
 };
 
 export type AuthActions = {
@@ -16,6 +17,7 @@ export type AuthActions = {
   setVerificationState: (state: AuthState['verification']['state']) => void;
   setVerificationCode: (code: string) => void;
   setErrorMessage: (error: string) => void;
+  setRecoveryCode: (recoveryCode: string) => void;
 };
 
 export const useAuthStore = create<AuthState & AuthActions>((set) => ({
@@ -31,8 +33,10 @@ export const useAuthStore = create<AuthState & AuthActions>((set) => ({
     code: '',
     error: '',
   },
+  recoveryCode: '',
   setUser: (user) => set({ user }),
   setVerificationState: (state) => set((current) => ({ verification: { ...current.verification, state } })),
   setVerificationCode: (code) => set((current) => ({ verification: { ...current.verification, code } })),
   setErrorMessage: (error) => set((current) => ({ verification: { ...current.verification, error } })),
+  setRecoveryCode: (recoveryCode: string) => set({ recoveryCode }),
 }));
