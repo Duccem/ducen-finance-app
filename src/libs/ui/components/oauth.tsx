@@ -1,3 +1,5 @@
+import { useCreateUser } from '@/src/modules/user/application/create-user';
+import { useApolloUserRepository } from '@/src/modules/user/infrastructure/apollo/apollo-user-repository';
 import { useOAuth } from '@clerk/clerk-expo';
 import type { OAuthStrategy } from '@clerk/types';
 import * as Linking from 'expo-linking';
@@ -7,6 +9,8 @@ import Button from './button';
 
 export const Oauth = ({ strategy, Icon }: { strategy: OAuthStrategy; Icon: React.ComponentType<any> }) => {
   const { startOAuthFlow } = useOAuth({ strategy });
+  const userRepository = useApolloUserRepository();
+  const { createUser } = useCreateUser(userRepository);
   const onOauthPress = async () => {
     try {
       const { createdSessionId, signUp, setActive } = await startOAuthFlow({
@@ -17,6 +21,11 @@ export const Oauth = ({ strategy, Icon }: { strategy: OAuthStrategy; Icon: React
       if (createdSessionId) {
         await setActive!({ session: createdSessionId });
         if (signUp?.createdUserId) {
+          await createUser({
+            email: signUp.emailAddress || '',
+            name: signUp.firstName || '',
+            externalId: signUp.createdUserId,
+          });
         }
         router.replace('/(root)/(tabs)/home');
       }

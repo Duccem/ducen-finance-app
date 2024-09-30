@@ -22,7 +22,7 @@ import {
 const ConfirmCode = () => {
   const { verification, setVerificationState, setErrorMessage, setVerificationCode, user } = useAuthStore();
   const { isLoaded, signUp, setActive } = useSignUp();
-  const userRepository = useApolloUserRepository({});
+  const userRepository = useApolloUserRepository();
   const { createUser } = useCreateUser(userRepository);
   const onVerify = async () => {
     if (!isLoaded) return;
@@ -33,7 +33,11 @@ const ConfirmCode = () => {
       });
       if (completedSignUp.status === 'complete') {
         await setActive({ session: completedSignUp.createdSessionId });
-        //await createUser(user, completedSignUp.createdUserId || '');
+        await createUser({
+          email: user.email,
+          name: user.name,
+          externalId: completedSignUp.createdUserId || '',
+        });
         setVerificationState('success');
         router.push('/(auth)/email-verified');
       } else {

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { LogBox } from 'react-native';
 import 'react-native-reanimated';
 import { AnimationScreen } from '../libs/ui/sections/splash';
+import { ApolloContext } from '../libs/providers/apollo-provider';
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -37,9 +38,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   if (!publishableKey) {
-    throw new Error(
-      'Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env',
-    );
+    throw new Error('Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env');
   }
 
   if (!appReady || !animationFinished) {
@@ -58,12 +57,14 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(root)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <ApolloContext>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(root)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ApolloContext>
         <StatusBar backgroundColor="transparent" />
       </ClerkLoaded>
     </ClerkProvider>

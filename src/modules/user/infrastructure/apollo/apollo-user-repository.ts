@@ -1,13 +1,10 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
 import { User } from '../../domain/user';
 import { UserRepository } from '../../domain/user-repository';
 import { SIGN_UP_MUTATION } from './sing-up-mutation';
 
-export const useApolloUserRepository = ({
-  client,
-}: {
-  client?: ApolloClient<NormalizedCacheObject>;
-}): UserRepository => {
+export const useApolloUserRepository = (): UserRepository => {
+  const client = useApolloClient();
   return {
     async createUser(user: User) {
       await client!.mutate({
